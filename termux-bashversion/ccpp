@@ -1,0 +1,35 @@
+#!/data/data/com.termux/files/usr/bin/bash
+
+# 检查是否传入文件名参数
+if [ -z "$1" ]; then
+    echo "请提供一个 C++ 源文件作为参数。"
+    exit 1
+fi
+
+# 获取文件名（不含扩展名）
+filename=$(basename "$1" .cpp)
+
+# 编译 C++ 文件
+clang++ "$1" -o "$filename"
+if [ $? -ne 0 ]; then
+    echo "编译失败。"
+    exit 1
+fi
+
+echo "编译完成力!"
+
+start_time=$(date +%s%N)
+
+# 运行可执行文件
+./"$filename"
+
+end_time=$(date +%s%N)
+
+elapsed_time=$(( (end_time - start_time) / 1000000 ))
+
+# 删除可执行文件
+rm "$filename"
+
+echo "运行结束力!"
+
+echo "程序耗时: $elapsed_time 毫秒"
