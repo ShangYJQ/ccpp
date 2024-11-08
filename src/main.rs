@@ -1,4 +1,3 @@
-use colored::*; // 引入 colored 库来处理彩色输出
 use std::env;
 use std::env::consts::OS;
 use std::fs;
@@ -41,7 +40,6 @@ fn main() {
             exit(1);
         }
     };
-
     // 3. 检查编译是否成功
     if compile_output.status.success() {
         println!("C++ program compiled successfully!\n");
@@ -59,17 +57,9 @@ fn main() {
         // 打印运行时间
         if status.success() {
             println!("\nC++ program executed successfully.");
-            // 引入 colored 库来处理彩色输出
 
-            let elapsed_time_str = if OS == "windows" {
-                // Windows 不使用颜色
-                format!("{} ms", elapsed_time.as_millis())
-            } else {
-                // 其他平台应用绿色
-                format!("{} ms", elapsed_time.as_millis()).green()
-            };
 
-            println!("Running time: {}.", elapsed_time_str); // 这里不再多一个括号
+        println!("Running time  {:.2}  ms",elapsed_time.as_millis());
         } else {
             eprintln!("Program failed to execute.\n");
         }
